@@ -163,7 +163,6 @@ body{
 
 /* -----------------------------------------right side */
 .right_side{
-    min-height: 800px;
     background: var(--main);
     border-radius: 40px;
     filter: drop-shadow(0 0 20px rgba(0,0,0,0.2));
