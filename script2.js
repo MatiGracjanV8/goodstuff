@@ -150,6 +150,12 @@ function pageBack(){
   body.setAttribute('style', 'transform: translateX(0%);');
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  document.body.addEventListener('touchmove', function(event) {
+    event.preventDefault();
+  }, { passive: false });
+});
+
 showData();
 console.log(numberTaskP);
 // window.localStorage.clear();
