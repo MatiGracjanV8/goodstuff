@@ -143,7 +143,7 @@ function showData(){
 }
 
 function extendPage(){
-    body.setAttribute('style', 'transform: translateX(-68%);');
+    body.setAttribute('style', 'transform: translateX(-70%);');
 }
 
 function pageBack(){
