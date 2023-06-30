@@ -156,6 +156,17 @@ document.addEventListener('DOMContentLoaded', function() {
   }, { passive: false });
 });
 
+document.addEventListener('touchstart', this.touchstart);
+document.addEventListener('touchmove', this.touchmove);
+
+function touchstart(e) {
+    e.preventDefault()
+}
+
+function touchmove(e) {
+    e.preventDefault()
+}
+
 showData();
 console.log(numberTaskP);
 // window.localStorage.clear();
