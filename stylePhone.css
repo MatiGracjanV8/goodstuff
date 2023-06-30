@@ -1,0 +1,19 @@
+@media only screen and (max-width: 730px) {
+
+/* -----------------------------------------left side */
+.left_side{
+    padding: 7%;
+}
+/* extend button for phone */
+.left_side .extend{
+    display: flex;
+}
+/* -----------------------------------------right side */
+.right_side{
+    transform: translateX(4%);
+}
+.right_side .list_of_tasks li{
+    min-width: 200px;
+    max-width: 300px;
+}
+}

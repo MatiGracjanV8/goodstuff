@@ -4,8 +4,9 @@ let businessBox = document.querySelector(".business_box");
 let personalBox = document.querySelector(".personal_box");
 let TaskPInfo = document.getElementById("number_taskP");
 let TaskBInfo = document.getElementById("number_taskB");
-let menutask = document.querySelector(".selectTask");
+let menutask = document.querySelector(".contenerTask");
 let taskvalue = document.querySelector(".textForTask");
+let body = document.querySelector("body");
 
 window.addEventListener('load', function(){
   updatePersonal();
@@ -16,9 +17,9 @@ let isClicked = false;
 
 function addTask(){
   if (isClicked) {
-    menutask.setAttribute('style', 'opacity: 0%');
+    menutask.setAttribute('style', 'display: none;');
   }else{
-    menutask.setAttribute('style', 'opacity: 100%');
+    menutask.setAttribute('style', 'display: flex;');
   }
 
   isClicked = !isClicked;
@@ -38,6 +39,14 @@ function addTaskPersonal(){
   text.innerHTML = '<p>'+taskvalue.value+'</p>';
   li.appendChild(delet);
 
+  if (isClicked) {
+    menutask.setAttribute('style', 'display: none;');
+  }else{
+    menutask.setAttribute('style', 'display: flex;');
+  }
+
+  isClicked = !isClicked;
+
   updatePersonal();
   saveData();
 }
@@ -55,6 +64,14 @@ function addTaskBusiness(){
   li.appendChild(text);
   text.innerHTML = '<p>'+taskvalue.value+'</p>';
   li.appendChild(delet);
+
+  if (isClicked) {
+    menutask.setAttribute('style', 'display: none;');
+  }else{
+    menutask.setAttribute('style', 'display: flex;');
+  }
+
+  isClicked = !isClicked;
 
   updateBusiness();
   saveData();
@@ -123,6 +140,14 @@ function saveData(){
 
 function showData(){
     list.innerHTML = localStorage.getItem("data");
+}
+
+function extendPage(){
+    body.setAttribute('style', 'transform: translateX(-68%);');
+}
+
+function pageBack(){
+  body.setAttribute('style', 'transform: translateX(0%);');
 }
 
 showData();
