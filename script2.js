@@ -7,10 +7,12 @@ let TaskBInfo = document.getElementById("number_taskB");
 let menutask = document.querySelector(".contenerTask");
 let taskvalue = document.querySelector(".textForTask");
 let body = document.querySelector("body");
+let circleProg = document.querySelector(".circle_progress");
 
 window.addEventListener('load', function(){
   updatePersonal();
   updateBusiness();
+  circuralProgressPlus();
 });
 
 let isClicked = false;
@@ -48,6 +50,7 @@ function addTaskPersonal(){
   isClicked = !isClicked;
 
   updatePersonal();
+  circuralProgressPlus();
   saveData();
 }
 
@@ -74,6 +77,7 @@ function addTaskBusiness(){
   isClicked = !isClicked;
 
   updateBusiness();
+  circuralProgressPlus();
   saveData();
 }
 
@@ -82,11 +86,13 @@ list.addEventListener("click", function(e){
     e.target.classList.remove("task_done_p");
     updatePersonal();
     updateBusiness();
+    circuralProgressMin();
     saveData();
   } else {
     e.target.classList.add("task_done_p");
     updatePersonal();
     updateBusiness();
+    circuralProgressPlus();
     saveData();
   }
 });
@@ -98,6 +104,8 @@ list.addEventListener("click", function(e){
     e.target.parentElement.remove();
     updatePersonal();
     updateBusiness();
+    circuralProgressMin();
+    circuralProgressPlus();
     saveData();
   }
 });
@@ -133,6 +141,93 @@ function updateBusiness(){
       businessBox.setAttribute('style', 'opacity: 100%');
     }
 }
+// let animate_progress = 0;
+// function circuralProgress() {
+//   let done_tasks = document.querySelectorAll(".task_done_b, .task_done_p").length;
+//   let total_tasks = document.querySelectorAll("li").length;
+//   let progress = (done_tasks / total_tasks) * 100;
+//   let g = progress - animate_progress;
+//   animate_progress = (animate_progress - g) + (progress-animate_progress);
+//   console.log(animate_progress+' animated');
+//   console.log(progress+'%');
+//   console.log(g+' g');
+
+//   function animateP() {
+//     let animateC = setInterval(() => {
+//       animate_progress++;
+//       circleProg.style.background = `conic-gradient(
+//         #111 ${animate_progress * 3.6}deg,
+//         #fff ${animate_progress * 3.6}deg
+//       )`;
+//       if (animate_progress >= progress) {
+//         clearInterval(animateC);
+//       }
+//     }, 2);
+//   }
+
+//   animateP();
+// }
+
+let animate_progress = 0;
+
+function circuralProgressPlus() {
+  let done_tasks = document.querySelectorAll(".task_done_b, .task_done_p").length;
+  let total_tasks = document.querySelectorAll("li").length;
+  let progress = (done_tasks / total_tasks) * 100;
+  let g = Math.abs(progress - animate_progress); 
+  animate_progress = (animate_progress - g) + (progress - animate_progress);
+  // console.log(animate_progress + ' animated');
+  // console.log(progress + '%');
+  // console.log(g + ' g');
+
+  function animateP() {
+    let animateC = setInterval(() => {
+      animate_progress++;
+      circleProg.style.background = `conic-gradient(
+        #111 ${animate_progress * 3.6}deg,
+        #fff ${animate_progress * 3.6}deg
+      )`;
+      if (animate_progress >= progress) {
+        clearInterval(animateC);
+      }
+    }, 2);
+  }
+
+  animateP();
+}
+
+function circuralProgressMin() {
+  let done_tasks = document.querySelectorAll(".task_done_b, .task_done_p").length;
+  let total_tasks = document.querySelectorAll("li").length;
+  let progress = (done_tasks / total_tasks) * 100;
+  let g = Math.abs(progress - animate_progress); 
+  animate_progress = (animate_progress + g) - (animate_progress - progress);
+  // console.log(animate_progress + ' animated');
+  // console.log(progress + '%');
+  // console.log(g + ' g');
+
+  function animateP() {
+    let animateC = setInterval(() => {
+      animate_progress--;
+      circleProg.style.background = `conic-gradient(
+        #111 ${animate_progress * 3.6}deg,
+        #fff ${animate_progress * 3.6}deg
+      )`;
+      if (animate_progress <= progress) {
+        clearInterval(animateC);
+      }
+    }, 2);
+  }
+
+  animateP();
+}
+
+
+
+
+
+
+
 
 function saveData(){
     localStorage.setItem("data", list.innerHTML);
@@ -149,6 +244,9 @@ function extendPage(){
 function pageBack(){
   body.setAttribute('style', 'transform: translateX(0%);');
 }
+
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
   document.body.addEventListener('touchmove', function(event) {
@@ -168,5 +266,4 @@ function touchmove(e) {
 }
 
 showData();
-console.log(numberTaskP);
 // window.localStorage.clear();
