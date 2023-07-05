@@ -1,4 +1,5 @@
 let list = document.querySelector(".list_of_tasks");
+let listSpecial = document.querySelector(".list_of_special");
 let tasksP = document.querySelectorAll(".to_do_p");
 let businessBox = document.querySelector(".business_box");
 let personalBox = document.querySelector(".personal_box");
@@ -8,6 +9,11 @@ let menutask = document.querySelector(".contenerTask");
 let taskvalue = document.querySelector(".textForTask");
 let body = document.querySelector("body");
 let circleProg = document.querySelector(".circle_progress");
+let grass_boxNumber = listSpecial.querySelectorAll("li").length;
+let grass_box = document.querySelectorAll(".contenerGrass");
+let grass_button = document.querySelector(".specialGrass");
+
+console.log(grass_boxNumber);
 
 window.addEventListener('load', function(){
   updatePersonal();
@@ -81,6 +87,37 @@ function addTaskBusiness(){
   saveData();
 }
 
+function addTaskSpecialGrass(){
+  if(grass_boxNumber == 1){
+    grass_button.disabled = true;
+  }else{
+  let li = document.createElement("li");
+  let delet = document.createElement("span");
+  let text = document.createElement("p");
+  let image = document.createElement("img");
+  image.src = 'grass.png';
+  delet.classList.add("delet");
+  li.classList.add("contenerGrass");
+  listSpecial.appendChild(li);
+  text.innerHTML = 'Mow Grass';
+  li.appendChild(text);
+  li.appendChild(image);
+  li.appendChild(delet);
+  }
+  if (isClicked) {
+    menutask.setAttribute('style', 'display: none;');
+  }else{
+    menutask.setAttribute('style', 'display: flex;');
+  }
+
+  isClicked = !isClicked;
+
+  updatePersonal();
+  circuralProgressPlus();
+  saveDataSpecial();
+  
+}
+
 list.addEventListener("click", function(e){
   if (e.target.classList.contains("task_done_p")) {
     e.target.classList.remove("task_done_p");
@@ -110,9 +147,49 @@ list.addEventListener("click", function(e){
   }
 });
 
+listSpecial.addEventListener("click", function(e){
+  if(e.target.tagName === "SPAN"){
+    e.target.parentElement.remove();
+    updatePersonal();
+    updateBusiness();
+    circuralProgressMin();
+    circuralProgressPlus();
+    saveDataSpecial();
+  }
+});
+
+let totalNumberOfMowedGrass = 0;
+
+var score = localStorage.getItem("mow");
+
+if (score !== null) {
+  totalNumberOfMowedGrass = parseInt(score);
+}
+
+listSpecial.addEventListener("click", function(e){
+  if (e.target.classList.contains("task_done_p")) {
+    e.target.classList.remove("task_done_p");
+    updatePersonal();
+    updateBusiness();
+    circuralProgressMin();
+    saveDataSpecial();
+  } else {
+    e.target.classList.add("task_done_p");
+    updatePersonal();
+    updateBusiness();
+    circuralProgressPlus();
+    saveDataSpecial();
+    totalNumberOfMowedGrass++;
+    showMowingStats();
+    mowingStats();
+  }
+
+});
+
+
 function updatePersonal(){
     let done_tasks = document.querySelectorAll(".task_done_p").length;
-    let total_tasks = document.querySelectorAll(".to_do_p, .task_done_p").length;
+    let total_tasks = document.querySelectorAll(".to_do_p, .task_done_p, .contenerGrass").length;
     let progress = (done_tasks / total_tasks)*100;
     let showprog = document.querySelector(".progress_barP");
     showprog.style.width = progress + '%';
@@ -141,32 +218,6 @@ function updateBusiness(){
       businessBox.setAttribute('style', 'opacity: 100%');
     }
 }
-// let animate_progress = 0;
-// function circuralProgress() {
-//   let done_tasks = document.querySelectorAll(".task_done_b, .task_done_p").length;
-//   let total_tasks = document.querySelectorAll("li").length;
-//   let progress = (done_tasks / total_tasks) * 100;
-//   let g = progress - animate_progress;
-//   animate_progress = (animate_progress - g) + (progress-animate_progress);
-//   console.log(animate_progress+' animated');
-//   console.log(progress+'%');
-//   console.log(g+' g');
-
-//   function animateP() {
-//     let animateC = setInterval(() => {
-//       animate_progress++;
-//       circleProg.style.background = `conic-gradient(
-//         #111 ${animate_progress * 3.6}deg,
-//         #fff ${animate_progress * 3.6}deg
-//       )`;
-//       if (animate_progress >= progress) {
-//         clearInterval(animateC);
-//       }
-//     }, 2);
-//   }
-
-//   animateP();
-// }
 
 let animate_progress = 0;
 
@@ -176,9 +227,6 @@ function circuralProgressPlus() {
   let progress = (done_tasks / total_tasks) * 100;
   let g = Math.abs(progress - animate_progress); 
   animate_progress = (animate_progress - g) + (progress - animate_progress);
-  // console.log(animate_progress + ' animated');
-  // console.log(progress + '%');
-  // console.log(g + ' g');
 
   function animateP() {
     let animateC = setInterval(() => {
@@ -190,7 +238,7 @@ function circuralProgressPlus() {
       if (animate_progress >= progress) {
         clearInterval(animateC);
       }
-    }, 2);
+    }, 7);
   }
 
   animateP();
@@ -202,9 +250,6 @@ function circuralProgressMin() {
   let progress = (done_tasks / total_tasks) * 100;
   let g = Math.abs(progress - animate_progress); 
   animate_progress = (animate_progress + g) - (animate_progress - progress);
-  // console.log(animate_progress + ' animated');
-  // console.log(progress + '%');
-  // console.log(g + ' g');
 
   function animateP() {
     let animateC = setInterval(() => {
@@ -216,11 +261,13 @@ function circuralProgressMin() {
       if (animate_progress <= progress) {
         clearInterval(animateC);
       }
-    }, 2);
+    }, 7);
   }
 
   animateP();
 }
+
+
 
 
 
@@ -233,16 +280,34 @@ function saveData(){
     localStorage.setItem("data", list.innerHTML);
 }
 
+function mowingStats(){
+  localStorage.setItem("mow", totalNumberOfMowedGrass.toString());
+}
+
+function showMowingStats(){
+  var score = localStorage.getItem("mow");
+  var scoreTotal = parseInt(score);
+  // console.log('You have mowned your lawn '+score+' times!');
+}
+
 function showData(){
     list.innerHTML = localStorage.getItem("data");
 }
 
+function saveDataSpecial(){
+  localStorage.setItem("data2", listSpecial.innerHTML);
+}
+
+function showDataSpecial(){
+  listSpecial.innerHTML = localStorage.getItem("data2");
+}
+
 function extendPage(){
-    body.setAttribute('style', 'transform: translateX(-70%);');
+    body.setAttribute('style', 'transform: translateX(-67%);');
 }
 
 function pageBack(){
-  body.setAttribute('style', 'transform: translateX(0%);');
+    body.setAttribute('style', 'transform: translateX(0%);');
 }
 
 
@@ -266,4 +331,5 @@ function touchmove(e) {
 }
 
 showData();
+showDataSpecial();
 // window.localStorage.clear();

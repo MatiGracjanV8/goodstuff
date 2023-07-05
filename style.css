@@ -212,17 +212,19 @@ body{
 /* -------------progress boxy */
 .progress_boxes{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
     gap: 1vw;
     margin-bottom: 70px;
 }
 .business_box, .personal_box{
-    width: 50%;
+    flex: 1;
     background: var(--third);
     border-radius: 20px;
-    padding: 5% 5% 2% 5%;
+    padding: 30px 30px 15px 30px;
     display: flex;
     flex-direction: column;
 }
@@ -313,9 +315,48 @@ body{
 }
 /* --------- koniec adding task button */
 /* ------------------------------------------------------kontener for tasks */
+.right_side .container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+    gap: 30px;
+    height: fit-content;
+    /* background-color: rebeccapurple; */
+    position: relative;
+}
+.right_side .container .list_of_special{
+    flex: 3;
+    /* background: red; */
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: initial;
+}
+.right_side .container .list_of_special li {
+    height: calc(50%-10px);
+    min-height: 100px;
+    max-height: 200px;
+    width: 100%;
+    min-width: 170px;
+    max-width: 250px;
+    background: var(--third);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+}
 .right_side .list_of_tasks li{
-    width: 470px;
+    /* width: 470px;
+    height: 80px; */
     height: 80px;
+    width: 100%;
+    max-width: 470px;
+    min-width: max-content;
     border-radius: 30px;
     list-style: none;
     background: var(--third);
@@ -333,8 +374,10 @@ body{
     user-select: none;
     position: relative;
     pointer-events: all;
+    padding-right: 30px;
 }
 .right_side .list_of_tasks{
+    flex: 3;
     margin: 0;
     padding: 0;
     display: flex;
@@ -342,7 +385,8 @@ body{
     gap: 10px;
     transition: .2s;
     pointer-events: none;
-    margin-bottom: 100px;
+    margin-right: 40px;
+    /* background: green; */
 }
 .right_side .list_of_tasks li .task_completion{
     width: 30px;
@@ -458,6 +502,7 @@ body{
     border-radius: 35px;
     display: none;
     transition: .3s;
+    flex-wrap: wrap;
 }
 .Bbutton, .Pbutton{
     padding: 20px;
@@ -469,6 +514,67 @@ body{
     position: relative;
     overflow: hidden;
     border-bottom: 2px solid var(--fourth);
+    flex: 2;
+    min-width: 50px;
+}
+.specialCode, .specialGrass{
+    flex: 5;
+    /* box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.4); */
+}
+.specialCode{
+    background: linear-gradient(130deg, #2a4670, #0d4fb3);
+    border-bottom: 4px solid #111d2e;
+}
+.specialCode i{
+    color: #181c36;
+}
+.specialGrass{
+    background: linear-gradient(130deg, #327542, #05ca33);
+    border-bottom: 4px solid #1b3f23;
+}
+.specialGrass:disabled{
+    opacity: 30%;
+}
+.contenerGrass{
+    overflow: hidden;
+    position: relative;
+    font-weight: 900;
+    background: #477551 !important;
+    border: 4px dashed #2f4d35;
+    transition: .2s;
+}
+.contenerGrass .delet{
+    top: 5px;
+    right: 5px;
+    transform: translateY(-40px);
+    transition: .3s;
+    opacity: 1;
+    background: #23522f;
+}
+.contenerGrass .delet:hover{
+    cursor: pointer;
+    background: #102c17;
+}
+.contenerGrass:hover .delet{
+    transform: translateY(0px);
+}
+.task_done_p img{
+    transform: translateY(40px);
+}
+.contenerGrass:hover{
+    filter: brightness(85%);
+    cursor: pointer;
+}
+.contenerGrass img{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    filter: saturate(0%) brightness(10%);
+    opacity: 30%;
+    transition: .3s;
+    pointer-events: none;
 }
 .Bbutton i, .Pbutton i{
     position: absolute;
