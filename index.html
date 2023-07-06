@@ -63,15 +63,22 @@
                 <!-- generated -->
             </ul>
         </div>
-        <div class="add_task" onclick="addTask()"></div>
+        <div class="add_task" onclick="showAddMenu()"></div>
         <div class="contenerTask">
+            <div class="go_back add_task" onclick="showAddMenu()"></div>
             <div class="selectTask">
-                <input type="text" class="textForTask">
+                <div class="alertWhileAddingTask"><!-- generated --></div>
+                <div class="contenerForInput">
+                    <i class="fa-solid fa-comments"></i>
+                    <div class="afterForInput">
+                        <input type="text" class="textForTask">
+                    </div>
+                </div>    
                 <div class="containerForChoice">
-                    <div class="Bbutton" onclick="addTaskBusiness()">Business<i class="fa-solid fa-business-time"></i></div>
-                    <div class="Pbutton" onclick="addTaskPersonal()">Personal<i class="fa-solid fa-person-biking"></i></div>
-                    <div class="Pbutton specialGrass" onclick="addTaskSpecialGrass()">Mow Grass<i class="fa-solid fa-cannabis"></i></div>
-                    <div class="Pbutton specialCode" onclick="addTaskSpecialProgramming()">Programming<i class="fa-solid fa-code"></i></div>
+                    <!-- <div class="addTaskButton Bbutton" onclick="addTaskBusiness()">Business<i class="fa-solid fa-business-time"></i></div> -->
+                    <div class="addTaskButton" onclick="addTaskPersonal()">Personal<i class="fa-solid fa-plus"></i></div>
+                    <div class="addTaskButton specialGrass" onclick="addTaskSpecialGrass()">Mow Grass<img src="grass.png"></div>
+                    <!-- <div class="addTaskButton specialCode" onclick="addTaskSpecialProgramming()">Programming<i class="fa-solid fa-code"></i></div> -->
                 </div>
             </div>
         </div>

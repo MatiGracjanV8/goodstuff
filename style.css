@@ -480,22 +480,22 @@ body{
     gap: 15px;
     flex-direction: column;
     transition: .2s;
-    background: rgba(255, 255, 255, 0.5);
+    background: var(--main);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.73);
+    overflow: hidden;
 }
 .contenerTask{
     position: absolute;
+    background: var(--main);
     bottom: 0;
     right: 0;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: brightness(70%) blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -504,37 +504,97 @@ body{
     transition: .3s;
     flex-wrap: wrap;
 }
-.Bbutton, .Pbutton{
+/* -------buttons adding tasks */
+.addTaskButton{
     padding: 20px;
     background: var(--main);
-    border-radius: 5px;
+    border-radius: 30px;
     transition: .2s;
     color: var(--font);
     font-weight: 900;
     position: relative;
     overflow: hidden;
-    border-bottom: 2px solid var(--fourth);
     flex: 2;
     min-width: 50px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    min-height: 100px;
 }
-.specialCode, .specialGrass{
-    flex: 5;
-    /* box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.4); */
+.addTaskButton::before{
+    content: "";
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    background: var(--secondary);
+    border-radius: 25px;
 }
-.specialCode{
-    background: linear-gradient(130deg, #2a4670, #0d4fb3);
-    border-bottom: 4px solid #111d2e;
+.addTaskButton::after{
+    content: "Add Task";
+    background: var(--main);
+    position: absolute;
+    top: 11px;
+    bottom: 20px;
+    left: 11px;
+    right: 11px;
+    border-radius: 20px;
+    overflow: hidden;
+    font-weight: 900;
+    transition: .2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 30px;
 }
-.specialCode i{
-    color: #181c36;
+.addTaskButton:hover{
+    cursor: pointer;
+    transform: translateY(-2px);
+    transition: .4s;
 }
-.specialGrass{
-    background: linear-gradient(130deg, #327542, #05ca33);
-    border-bottom: 4px solid #1b3f23;
+.addTaskButton i{
+    position: absolute;
+    top: calc(50% + 15px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    transition: .3s;
+    pointer-events: none;
+    font-weight: 900;
+    font-size: 0.8em;
 }
-.specialGrass:disabled{
+.addTaskButton:hover{
+    border: 4px solid var(--secondary);
+}
+.specialGrass::after {
+    content: "Mow Grass";
+    background-color: #477551;
+}
+.specialGrass::before{
+    content: "";
+    background: #1e3122;
+}
+.specialGrass img{
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    filter: saturate(0%) brightness(10%);
     opacity: 30%;
+    transition: .3s;
+    pointer-events: none;
+    border-radius: 40px;
 }
+/* ------THE END buttons adding tasks */
+
+
+
+
+
+
+
 .contenerGrass{
     overflow: hidden;
     position: relative;
@@ -570,64 +630,91 @@ body{
     bottom: 0;
     left: 0;
     width: 100%;
-    z-index: 1;
     filter: saturate(0%) brightness(10%);
     opacity: 30%;
     transition: .3s;
     pointer-events: none;
 }
-.Bbutton i, .Pbutton i{
-    position: absolute;
-    bottom: -10px;
-    right: -10px;
-    opacity: 30%;
-    font-size: 4em;
-    transform: rotate(-30deg);
-    transition: .3s;
-}
-.Pbutton i{
-    right: -5px;
-    bottom: -10px;
-}
 .containerForChoice{
     display: flex;
     flex-direction: row;
     gap: 5px;
+    flex-wrap: wrap;
+}
+.contenerForInput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    transition: .3s;
+    position: relative;
+}
+.contenerForInput i{
+    position: absolute;
+    left: 20px;
+    z-index: 99;
+}
+.afterForInput{
+    width: 100%;
+    height: 100%;
+    background: var(--secondary);
+    border-radius: 30px;
+    padding: 3px 6px 6px 3px;
+    transition: .3s;
 }
 .textForTask{
     border-radius: 20px;
     outline: none;
     border: none;
     padding: 10px;
-    border-bottom: 2px solid var(--fourth);
+    /* border: 3px solid var(--secondary); */
+    min-width: 200px;
+    position: relative;
+    background: #fff;
+    transition: .3s;
+    padding-left: 40px;
+    font-weight: 900;
 }
-.Pbutton:hover{
+.textForTask::after{
+    content: '';
+    background: var(--main);
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 11px;
+}
+.textForTask:hover{
     cursor: pointer;
+}
+.contenerForInput:hover{
     transform: translateY(-2px);
-    transition: .4s;
+    border: 3px solid var(--secondary);
 }
-.Bbutton:hover{
-    cursor: pointer;
-    transform: translateY(-2px);
-    transition: .4s;
+.alertWhileAddingTask{
+    position: absolute;
+    top: 10px;
+    color: var(--main);
+    background: var(--secondary);
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 900;
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: .3s;
 }
-.Bbutton:hover i{
-    transform: scale(1.3) rotate(-30deg);
+.go_back{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
 }
-.Pbutton:hover i{
-    transform: scale(1.3) rotate(-30deg);
+.go_back::after{
+    content: '\f0d9' !important;
+    font-family: "FontAwesome";
 }
 /* ------------------------koniec adding tasks */
 p{
     pointer-events: none;
-}
-
-
-@keyframes progressAnimation {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
 }
