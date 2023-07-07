@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="stylePhone.css">
     <script src="https://kit.fontawesome.com/9cb06c396b.js" crossorigin="anonymous"></script>
     <script src="script.js" async defer></script>
     <title>Document</title>
 </head>
+
 <body>
     <div class="left_side">
         <div class="extend" onclick="extendPage()"><i class="fa-solid fa-chevron-left"></i></div>
@@ -21,20 +23,27 @@
                     <div class="img_hover">
                         <img src="auto.png">
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
         <h1 class="profile_name">Mateusz<br>Sokół</h1>
         <div class="nav_left">
-            <div class="nav_opt"><i class="fa-solid fa-bookmark"></i><p>Themes</p></div>
-            <div class="nav_opt"><i class="fa-solid fa-rectangle-list"></i><p>Categories</p></div>
-            <div class="nav_opt"><i class="fa-solid fa-dumbbell"></i><p>Gym</p></div>
+            <div class="nav_opt"><i class="fa-solid fa-bookmark"></i>
+                <p>Themes</p>
+            </div>
+            <div class="nav_opt"><i class="fa-solid fa-rectangle-list"></i>
+                <p>Categories</p>
+            </div>
+            <div class="nav_opt"><i class="fa-solid fa-dumbbell"></i>
+                <p>Gym</p>
+            </div>
         </div>
     </div>
     <div class="right_side">
         <div class="navigation">
             <div class="left_nav"><i class="fa-solid fa-bars"></i></div>
-            <div class="right_nav"><i class="fa-solid fa-magnifying-glass"></i><i class="fa-solid fa-angles-left" onclick="pageBack()"></i></div>
+            <div class="right_nav"><i class="fa-solid fa-magnifying-glass"></i><i class="fa-solid fa-angles-left"
+                    onclick="pageBack()"></i></div>
         </div>
         <h1 class="welcome">What's up, Mateusz!</h1>
         <p class="info">Categories</p>
@@ -73,15 +82,18 @@
                     <div class="afterForInput">
                         <input type="text" class="textForTask">
                     </div>
-                </div>    
+                </div>
                 <div class="containerForChoice">
                     <!-- <div class="addTaskButton Bbutton" onclick="addTaskBusiness()">Business<i class="fa-solid fa-business-time"></i></div> -->
-                    <div class="addTaskButton" onclick="addTaskPersonal()">Personal<i class="fa-solid fa-plus"></i></div>
+                    <div class="addTaskButton" onclick="addTaskPersonal()">Personal<i class="fa-solid fa-plus"></i>
+                    </div>
                     <div class="addTaskButton specialGrass" onclick="addTaskSpecialGrass()">Mow Grass<img src="grass.png"></div>
+                    <div class="addTaskButton specialProgresive" onclick="addTaskSpecialProgresive()">Progress Task</div>
                     <!-- <div class="addTaskButton specialCode" onclick="addTaskSpecialProgramming()">Programming<i class="fa-solid fa-code"></i></div> -->
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

@@ -17,6 +17,7 @@ window.addEventListener('load', function () {
     updatePersonal();
     updateBusiness();
     circuralProgressPlus();
+    showPercentage();
 });
 
 let isClicked = false;
@@ -103,9 +104,9 @@ function addTaskBusiness() {
 
 //--------------------------for adding special task GRASS
 function addTaskSpecialGrass() {
-    let grass_boxNumber = listSpecial.querySelectorAll("li").length;
+    let boxNumber = listSpecial.querySelectorAll(".contenerGrass").length;
 
-    if (grass_boxNumber === 1) {
+    if (boxNumber === 1) {
         alert_box.style.opacity = "1";
         alert_box.style.transform = "translateY(0px)";
         alert_box.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Cannot add more of those!';
@@ -119,13 +120,75 @@ function addTaskSpecialGrass() {
         let delet = document.createElement("span");
         let text = document.createElement("p");
         let image = document.createElement("img");
+        let divBefore = document.createElement("div");
+        let divAfter = document.createElement("div");
         image.src = 'grass.png';
         delet.classList.add("delet");
+        divBefore.classList.add("contenerGrassLayerBefore");
+        divAfter.classList.add("contenerGrassLayerAfter");
         li.classList.add("contenerGrass");
         listSpecial.appendChild(li);
         text.innerHTML = 'Mow Grass';
-        li.appendChild(text);
-        li.appendChild(image);
+        li.appendChild(divBefore);
+        li.appendChild(divAfter);
+        divAfter.appendChild(text);
+        divAfter.appendChild(image);
+        li.appendChild(delet);
+
+
+        if (isClicked) {
+            menutask.style.display = 'none';
+        } else {
+            menutask.style.display = 'flex';
+        }
+
+        isClicked = !isClicked;
+
+        updatePersonal();
+        circuralProgressPlus();
+        saveDataSpecial();
+    }
+}
+
+function addTaskSpecialProgresive() {
+
+    if (taskvalue.value.length === 0) {
+        alert_box.style.opacity = "1";
+        alert_box.style.transform = "translateY(0px)";
+        alert_box.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Write Something First!';
+
+        setTimeout(function () {
+            alert_box.style.opacity = "0";
+            alert_box.style.transform = "translateY(-50px)";
+        }, 1300);
+    } else {
+        let li = document.createElement("li");
+        let delet = document.createElement("span");
+        let text = document.createElement("p");
+        let divBefore = document.createElement("div");
+        let divAfter = document.createElement("div");
+        let placeHolder = document.createElement("div");
+        let progresiveBar = document.createElement("div");
+        let barHelper = document.createElement("div");
+        let perCent = document.createElement("p");
+        delet.classList.add("delet");
+        divBefore.classList.add("contenerProgresiveLayerBefore");
+        divAfter.classList.add("contenerProgresiveLayerAfter");
+        progresiveBar.classList.add("progresiveBarTask");
+        placeHolder.classList.add("progTaskPlaceHolder");
+        barHelper.classList.add("barHelper");
+        perCent.classList.add("percentage");
+        li.classList.add("contenerProgresive");
+        listSpecial.appendChild(li);
+        text.innerHTML = taskvalue.value;
+        perCent.innerHTML = "0%";
+        li.appendChild(divBefore);
+        li.appendChild(divAfter);
+        divAfter.appendChild(placeHolder);
+        divAfter.appendChild(perCent);
+        placeHolder.appendChild(barHelper);
+        barHelper.appendChild(progresiveBar);
+        divAfter.appendChild(text);
         li.appendChild(delet);
 
 
@@ -174,16 +237,31 @@ list.addEventListener("click", function (e) {
 });
 
 //---------------------------------deleting special task
+
 listSpecial.addEventListener("click", function (e) {
     if (e.target.tagName === "SPAN") {
-        e.target.parentElement.remove();
+        let parentElement = e.target.parentElement;
+        let childElement = e.target.nextElementSibling;
+        localStorage.removeItem("perc");
+
+        parentElement.remove();
+        if (childElement) {
+            childElement.remove();
+        }
+
         updatePersonal();
         updateBusiness();
         circuralProgressMin();
         circuralProgressPlus();
         saveDataSpecial();
+        showPercentage();
+
     }
 });
+
+
+
+
 
 //---------------------------counter for number of mowings
 let totalNumberOfMowedGrass = 0;
@@ -193,31 +271,136 @@ if (score !== null) {
 }
 
 //---------------------------marking SPECIAL task as done
-listSpecial.addEventListener("click", function (e) {
-    if (e.target.classList.contains("task_done_p")) {
-        e.target.classList.remove("task_done_p");
-        updatePersonal();
-        updateBusiness();
-        circuralProgressMin();
-        saveDataSpecial();
-    } else {
-        e.target.classList.add("task_done_p");
-        updatePersonal();
-        updateBusiness();
-        circuralProgressPlus();
-        saveDataSpecial();
-        totalNumberOfMowedGrass++;
-        showMowingStats();
-        mowingStats();
-    }
 
+// listSpecial.addEventListener("click", function (e) {
+//     if (e.target.closest(".contenerProgresive")) {
+//         let completion = e.target.closest(".contenerProgresive").querySelector(".progresiveBarTask");
+//         let scoreCompletion = e.target.closest(".contenerProgresive").querySelector(".percentage");
+//         let percentage = parseFloat(e.target.dataset.percentage || "0");
+//         function savePercentage() {
+//             localStorage.setItem("perc", percentage.toString());
+//         }
+
+//         if (percentage < 100) {
+//             percentage += 10;
+//             completion.style.height = percentage + '%';
+//             scoreCompletion.innerHTML = percentage + '%';
+//             e.target.dataset.percentage = percentage;
+//             savePercentage();
+//             showPercentage();
+
+//             if (percentage === 100) {
+//                 console.log(percentage + ' done');
+
+//                 if (e.target.classList.contains("task_done_p")) {
+//                     e.target.classList.remove("task_done_p");
+//                     updatePersonal();
+//                     updateBusiness();
+//                     circuralProgressMin();
+//                     saveDataSpecial();
+//                 } else {
+//                     e.target.classList.add("task_done_p");
+//                     updatePersonal();
+//                     updateBusiness();
+//                     circuralProgressPlus();
+//                     saveDataSpecial();
+//                     showMowingStats();
+//                     mowingStats();
+//                 }
+//             }
+//         }
+//     } else {
+//         if (e.target.classList.contains("task_done_p")) {
+//             e.target.classList.remove("task_done_p");
+//             updatePersonal();
+//             updateBusiness();
+//             circuralProgressMin();
+//             saveDataSpecial();
+//         } else {
+//             e.target.classList.add("task_done_p");
+//             updatePersonal();
+//             updateBusiness();
+//             circuralProgressPlus();
+//             saveDataSpecial();
+//             totalNumberOfMowedGrass++;
+//             showMowingStats();
+//             mowingStats();
+//         }
+//     }
+// });
+
+listSpecial.addEventListener("click", function (e) {
+    if (e.target.closest(".contenerProgresive")) {
+        let completion = e.target.closest(".contenerProgresive").querySelector(".progresiveBarTask");
+        let scoreCompletion = e.target.closest(".contenerProgresive").querySelector(".percentage");
+        let percentage = parseFloat(e.target.dataset.percentage || localStorage.getItem("perc") || "0");
+
+        function savePercentage() {
+            localStorage.setItem("perc", percentage.toString());
+        }
+        if (percentage < 100) {
+            percentage += 10;
+            completion.style.height = percentage + '%';
+            scoreCompletion.innerHTML = percentage + '%';
+            e.target.dataset.percentage = percentage;
+            savePercentage();
+            showPercentage();
+
+            if (percentage === 100) {
+                console.log(percentage + ' done');
+
+                if (e.target.classList.contains("task_done_p")) {
+                    e.target.classList.remove("task_done_p");
+                    updatePersonal();
+                    updateBusiness();
+                    circuralProgressMin();
+                    saveDataSpecial();
+                } else {
+                    e.target.classList.add("task_done_p");
+                    updatePersonal();
+                    updateBusiness();
+                    circuralProgressPlus();
+                    saveDataSpecial();
+                    showMowingStats();
+                    mowingStats();
+                }
+            }
+        }
+    } else {
+        if (e.target.classList.contains("task_done_p")) {
+            e.target.classList.remove("task_done_p");
+            updatePersonal();
+            updateBusiness();
+            circuralProgressMin();
+            saveDataSpecial();
+        } else {
+            e.target.classList.add("task_done_p");
+            updatePersonal();
+            updateBusiness();
+            circuralProgressPlus();
+            saveDataSpecial();
+            totalNumberOfMowedGrass++;
+            showMowingStats();
+            mowingStats();
+        }
+    }
 });
+
+
+
+
+
+
+
+
+
+
 
 //---------------------------------------------------------------------------------PROGRESS BARS
 //---------------------------personal progressbar
 function updatePersonal() {
     let done_tasks = document.querySelectorAll(".task_done_p").length;
-    let total_tasks = document.querySelectorAll(".to_do_p, .task_done_p, .contenerGrass").length;
+    let total_tasks = document.querySelectorAll(".to_do_p, .task_done_p, .contenerGrass, .contenerProgresive").length;
     let progress = (done_tasks / total_tasks) * 100;
     let showprog = document.querySelector(".progress_barP");
     showprog.style.width = progress + '%';
@@ -307,6 +490,16 @@ function saveData() {
 
 function showData() {
     list.innerHTML = localStorage.getItem("data");
+}
+
+function showPercentage() {
+    let contentCheck = listSpecial.querySelectorAll(".contenerProgresive").length;
+    let comp = document.querySelector(".percentage");
+    let bar = document.querySelector(".progresiveBarTask");
+    if (contentCheck === 1) {
+        comp.innerHTML = localStorage.getItem("perc") + '%';
+        bar.style.height = localStorage.getItem("perc") + '%';
+    }
 }
 
 //---------------------------special list of tasks
