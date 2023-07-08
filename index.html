@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="stylePhone.css">
     <script src="https://kit.fontawesome.com/9cb06c396b.js" crossorigin="anonymous"></script>
     <script src="script.js" async defer></script>
-    <title>Document</title>
+    <title>NoteApp</title>
 </head>
 
 <body>
@@ -34,9 +34,11 @@
             <div class="nav_opt"><i class="fa-solid fa-rectangle-list"></i>
                 <p>Categories</p>
             </div>
-            <div class="nav_opt"><i class="fa-solid fa-dumbbell"></i>
-                <p>Gym</p>
-            </div>
+            <a href="indexGym.html" class="rout">
+                <div class="nav_opt"><i class="fa-solid fa-dumbbell"></i>
+                    <p>Gym</p>
+                </div>
+            </a>
         </div>
     </div>
     <div class="right_side">
@@ -87,13 +89,19 @@
                     <!-- <div class="addTaskButton Bbutton" onclick="addTaskBusiness()">Business<i class="fa-solid fa-business-time"></i></div> -->
                     <div class="addTaskButton" onclick="addTaskPersonal()">Personal<i class="fa-solid fa-plus"></i>
                     </div>
-                    <div class="addTaskButton specialGrass" onclick="addTaskSpecialGrass()">Mow Grass<img src="grass.png"></div>
-                    <div class="addTaskButton specialProgresive" onclick="addTaskSpecialProgresive()">Progress Task</div>
+                    <div class="addTaskButton specialGrass" onclick="addTaskSpecialGrass()">Mow Grass<img
+                            src="grass.png"></div>
+                    <div class="addTaskButton specialProgresive" onclick="addTaskSpecialProgresive()">Progress Task
+                    </div>
                     <!-- <div class="addTaskButton specialCode" onclick="addTaskSpecialProgramming()">Programming<i class="fa-solid fa-code"></i></div> -->
                 </div>
             </div>
         </div>
     </div>
+    <audio id="error" src="error.wav" autoplay></audio>
+    <audio id="click_calm" src="click_calm.wav" autoplay></audio>
+    <audio id="click_bass" src="click_bass.wav" autoplay></audio>
+    <audio id="click_mid" src="click_mid.wav" autoplay></audio>
 </body>
 
 </html>

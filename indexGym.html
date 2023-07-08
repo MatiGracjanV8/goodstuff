@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9cb06c396b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleGym.css">
+    <script src="scriptGym.js" async defer></script>
+    <title>Gym Section</title>
+</head>
+
+<body>
+    <div class="container chestBox" onclick="chestDay()">
+        <div class="borderBox">
+            <div class="spawner"></div>
+            <div class="content">
+                <div class="title">
+                    <p>CHEST DAY</p>
+                    <div class="textSpace"></div>
+                    <div class="infoText">
+                        <p class="infoType">Mid Chest</p>
+                        <p class="infoType">Upper Chest</p>
+                    </div>
+                </div>
+                <div class="actualValue">
+                    <p class="actualKg">80<span>KG</span></p>
+                    <div class="textSpace"></div>
+                    <div class="times">
+                        <p class="timesInside five">5 times</p>
+                        <p class="timesInside six">6 times</p>
+                        <p class="timesInside seven">7 times</p>
+                        <p class="timesInside eight">8 times</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contenerImage">
+                <img src="bench.png" class="imageBox">
+                <div class="line"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<audio id="error" src="error.wav" autoplay></audio>
+<audio id="click_calm" src="click_calm.wav" autoplay></audio>
+<audio id="click_bass" src="click_bass.wav" autoplay></audio>
+<audio id="click_mid" src="click_mid.wav" autoplay></audio>
+<audio id="click_reward" src="reward.wav" autoplay></audio>
+</html>

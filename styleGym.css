@@ -1,0 +1,250 @@
+/* @media only screen and (min-width: 1700px) {
+    .title{
+        font-size: 3em !important;
+    }
+    .actualValue{
+        font-size: 5em !important;
+    }
+    .actualValue span{
+        font-size: 0.4em !important;
+    }
+    .actualValue .textSpace{
+        height: 90px !important;
+    }
+    .timesInside{
+        font-size: 17px !important;
+    }
+} */
+* {
+    pointer-events: none;
+}
+
+body {
+    flex-direction: column;
+}
+
+.container {
+    background: var(--third);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    position: relative;
+    pointer-events: all;
+    transition: .3s;
+    position: relative;
+}
+
+.borderBox {
+    background: rgb(53, 53, 53);
+    width: 100%;
+    height: 350px;
+    border-radius: 25px;
+    overflow: hidden;
+    border: 7px solid var(--secondary);
+    position: relative;
+}
+
+.contenerImage {
+    height: 100%;
+    width: fit-content;
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.imageBox {
+    height: 100%;
+    filter: saturate(0);
+    opacity: 30%;
+}
+
+.line {
+    position: absolute;
+    top: 0;
+    left: -30px;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgb(53, 53, 53), transparent);
+}
+
+.chestBox {
+    min-width: 700px;
+    min-height: 350px;
+}
+
+.title {
+    color: var(--main);
+    font-size: 3vw;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-weight: 900;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 40vw;
+}
+
+.textSpace {
+    margin-left: 5px;
+    width: 5px;
+    height: calc(inherit - 30px);
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.infoText {
+    height: inherit;
+    font-size: 0.3em;
+    color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    flex-direction: column;
+}
+
+.infoType {
+    margin: 0;
+    padding: 0;
+}
+
+.actualValue {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 7vw;
+    color: var(--secondary);
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.actualValue span {
+    font-size: 3vw;
+    font-weight: 400;
+}
+
+.container p {
+    margin: 0;
+    padding: 0;
+}
+
+.actualValue .textSpace {
+    height: 6vw;
+}
+
+.times {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.timesInside {
+    margin: 0;
+    padding: 0;
+    font-size: 0.8vw;
+    color: rgba(255, 255, 255, 0.2);
+    filter: brightness(60%);
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    cursor: pointer;
+    background: var(--fourth);
+}
+
+.container:hover::before {
+    opacity: 1;
+    transition: .4s;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 35px;
+    transition: .3s;
+    opacity: 0;
+    border: 5px solid var(--third);
+}
+
+.stage {
+    filter: brightness(100%);
+}
+
+.title {
+    font-size: 3em;
+}
+
+.actualValue {
+    font-size: 5em;
+}
+
+.actualValue span {
+    font-size: 0.4em;
+}
+
+.actualValue .textSpace {
+    height: 90px;
+}
+
+.timesInside {
+    font-size: 17px;
+}
+
+@media only screen and (max-width: 1340px) {
+    .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 99;
+    }
+
+    .contenerImage {
+        z-index: 1;
+    }
+
+    .borderBox {
+        height: calc(100% - 15px);
+    }
+
+    .container {
+        min-width: 200px;
+        max-width: 100%;
+        height: 40vh;
+    }
+
+    /* .imageBox{
+        height: 50%;
+    } */
+
+}
+
+.upgradeLow {
+    width: 0;
+    height: 0;
+    transform: translateY(40px);
+    opacity: 0;
+    transition: .3s;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid black;
+}
+
+.spawner {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}

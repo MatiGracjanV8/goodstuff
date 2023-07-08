@@ -23,11 +23,21 @@ body {
     overflow-x: hidden;
     transition: .3s;
     scroll-behavior: smooth;
+    opacity: 0;
 }
 
 
 
 /* -----------------------------------------left side */
+
+.left_side{
+    transform: translateX(-50%);
+}
+.right_side{
+    transform: translateX(50%);
+}
+
+
 .left_side {
     margin-right: 2vw;
     padding: 4%;
@@ -860,7 +870,10 @@ body {
     ;
     font-size: 0.5em;
 }
-
+.rout{
+    text-decoration: none;
+    color: var(--secondary);
+}
 
 
 
@@ -961,4 +974,26 @@ body {
 /* ------------------------koniec adding tasks */
 p {
     pointer-events: none;
+}
+
+@keyframes startAnimateLeft{
+    0%{
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes startAnimateRight{
+    0%{
+        transform: translateX(50%);
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(0%);
+        opacity: 1;
+    }
 }

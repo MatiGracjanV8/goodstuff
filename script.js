@@ -12,18 +12,37 @@ let circleProg = document.querySelector(".circle_progress");
 let grass_box = document.querySelectorAll(".contenerGrass");
 let grass_button = document.querySelector(".specialGrass");
 let alert_box = document.querySelector(".alertWhileAddingTask");
+let leftSide = document.querySelector(".left_side");
+let rightSide = document.querySelector(".right_side");
+
+//audio
+let audioError = document.getElementById('error');
+let click_bass = document.getElementById('click_bass');
+let click_calm = document.getElementById('click_calm');
+let click_mid = document.getElementById('click_mid');
+let click_reward = document.getElementById('click_reward');
+
+
+
+
 
 window.addEventListener('load', function () {
     updatePersonal();
     updateBusiness();
     circuralProgressPlus();
     showPercentage();
+    leftSide.setAttribute("style", "animation: startAnimateLeft .4s ease-out;");
+    leftSide.style.animationFillMode = "forwards";
+    rightSide.setAttribute("style", "animation: startAnimateRight .4s ease-out;");
+    rightSide.style.animationFillMode = "forwards";
+    body.style.opacity = "1";
 });
 
 let isClicked = false;
 
 //------------------------------for buttons that open menu
 function showAddMenu() {
+    click_calm.play();
     if (isClicked) {
         menutask.setAttribute('style', 'display: none;');
     } else {
@@ -39,6 +58,7 @@ function addTaskPersonal() {
     if (taskvalue.value.length === 0) {
         alert_box.style.opacity = "1";
         alert_box.style.transform = "translateY(0px)";
+        audioError.play();
         alert_box.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Write Something First!';
 
         setTimeout(function () {
@@ -46,6 +66,7 @@ function addTaskPersonal() {
             alert_box.style.transform = "translateY(-50px)";
         }, 1000);
     } else {
+        click_mid.play();
         let li = document.createElement("li");
         let div = document.createElement("div");
         let text = document.createElement("p");
@@ -109,6 +130,7 @@ function addTaskSpecialGrass() {
     if (boxNumber === 1) {
         alert_box.style.opacity = "1";
         alert_box.style.transform = "translateY(0px)";
+        audioError.play();
         alert_box.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Cannot add more of those!';
 
         setTimeout(function () {
@@ -116,6 +138,7 @@ function addTaskSpecialGrass() {
             alert_box.style.transform = "translateY(-50px)";
         }, 1300);
     } else {
+        click_mid.play();
         let li = document.createElement("li");
         let delet = document.createElement("span");
         let text = document.createElement("p");
@@ -151,10 +174,23 @@ function addTaskSpecialGrass() {
 }
 
 function addTaskSpecialProgresive() {
+    let boxNumber = listSpecial.querySelectorAll(".contenerProgresive").length;
+    console.log(boxNumber);
 
-    if (taskvalue.value.length === 0) {
+    if (boxNumber === 1) {
         alert_box.style.opacity = "1";
         alert_box.style.transform = "translateY(0px)";
+        audioError.play();
+        alert_box.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Cannot add more of those!';
+
+        setTimeout(function () {
+            alert_box.style.opacity = "0";
+            alert_box.style.transform = "translateY(-50px)";
+        }, 1300);
+    } else if (taskvalue.value.length === 0) {
+        alert_box.style.opacity = "1";
+        alert_box.style.transform = "translateY(0px)";
+        audioError.play();
         alert_box.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Write Something First!';
 
         setTimeout(function () {
@@ -162,6 +198,7 @@ function addTaskSpecialProgresive() {
             alert_box.style.transform = "translateY(-50px)";
         }, 1300);
     } else {
+        click_mid.play();
         let li = document.createElement("li");
         let delet = document.createElement("span");
         let text = document.createElement("p");
@@ -209,6 +246,9 @@ function addTaskSpecialProgresive() {
 //---------------------------------------------------------------------------------EDITING TASKS
 //--------------------------------marking task as done
 list.addEventListener("click", function (e) {
+    if (e.target.tagName === "LI") {
+        click_calm.play();
+    }
     if (e.target.classList.contains("task_done_p")) {
         e.target.classList.remove("task_done_p");
         updatePersonal();
@@ -227,6 +267,7 @@ list.addEventListener("click", function (e) {
 //------------------------------------deleting the task
 list.addEventListener("click", function (e) {
     if (e.target.tagName === "SPAN") {
+        click_bass.play();
         e.target.parentElement.remove();
         updatePersonal();
         updateBusiness();
@@ -239,6 +280,7 @@ list.addEventListener("click", function (e) {
 //---------------------------------deleting special task
 
 listSpecial.addEventListener("click", function (e) {
+    click_calm.play();
     if (e.target.tagName === "SPAN") {
         let parentElement = e.target.parentElement;
         let childElement = e.target.nextElementSibling;
@@ -330,6 +372,7 @@ if (score !== null) {
 // });
 
 listSpecial.addEventListener("click", function (e) {
+    click_calm.play();
     if (e.target.closest(".contenerProgresive")) {
         let completion = e.target.closest(".contenerProgresive").querySelector(".progresiveBarTask");
         let scoreCompletion = e.target.closest(".contenerProgresive").querySelector(".percentage");
